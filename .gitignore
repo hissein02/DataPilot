@@ -30,6 +30,11 @@ coverage/
 .vscode/
 .idea/
 .impeccable.md
+/PLAN.md
+/PROJECT.md
+/AGENTS.md
+/.agents/
+/.codex/
 .DS_Store
 *.swp
 *.swo
