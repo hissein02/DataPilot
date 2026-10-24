@@ -1,0 +1,37 @@
+# Secrets: commit the example, never local environment values.
+.env
+.env.*
+!.env.example
+
+# Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.uv-cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Frontend dependencies, builds, and test reports
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Temporary analytical databases
+*.duckdb
+*.duckdb.wal
+
+# Local editor settings, design notes, and OS files
+.vscode/
+.idea/
+.impeccable.md
+.DS_Store
+*.swp
+*.swo
+*~
+*.log

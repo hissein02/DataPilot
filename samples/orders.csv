@@ -1,0 +1,9 @@
+order_id,order_date,region,product,units,unit_price
+1001,2026-01-03,North,Notebook,3,12.50
+1002,2026-01-05,South,Pen,10,2.00
+1003,2026-01-08,North,Notebook,2,12.50
+1004,2026-02-01,West,Folder,5,4.00
+1005,2026-02-03,South,Notebook,1,12.50
+1006,2026-02-11,West,Pen,20,2.00
+1007,2026-03-02,North,Folder,4,4.00
+1008,2026-03-05,South,Pen,7,2.00
