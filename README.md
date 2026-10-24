@@ -16,6 +16,31 @@ The frontend is built with React, TypeScript, and Vite. FastAPI handles uploads 
 
 When you ask a question, the backend reads the saved column profile, uses LangChain to plan the analysis and generate SQL, checks the SQL, runs it in DuckDB, and builds an answer from the returned rows. The SQL checks use SQLGlot. More detail is in [the architecture guide](docs/architecture.md).
 
+```mermaid
+flowchart LR
+    QUESTION[Question, note, and columns]
+
+    subgraph LANGCHAIN[LangChain]
+        direction LR
+        PLAN[Plan up to three checks]
+        GENERATE[Generate SQL]
+        REPORT[Write answer from results]
+    end
+    ANSWER[Answer and supporting results]
+
+    QUESTION --> PLAN
+    PLAN -->|For each check| GENERATE
+    GENERATE --> VALIDATE[Validate with SQLGlot]
+    VALIDATE -->|Valid| DUCKDB[(DuckDB)]
+    VALIDATE -->|Invalid| RETRY[Retry SQL]
+    DUCKDB -->|Rows| RESULTS[Collect results]
+    DUCKDB -->|Error| RETRY
+    RETRY --> GENERATE
+    RESULTS --> REPORT
+    PLAN -->|Profile| ANSWER
+    REPORT --> ANSWER
+```
+
 ## SQL safety
 
 Generated SQL has to be a single `SELECT` query against the selected table. The app rejects other tables, writes, external readers, and unsupported functions. Queries use a read-only DuckDB connection with external access disabled. Time, row, and response-size limits keep results bounded. Uploaded files are stored in separate temporary workspaces that expire after 60 minutes of inactivity.
